@@ -1,0 +1,70 @@
+{
+	"compiler": {
+		"version": "0.8.31+commit.fd3a2265"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "g2Point256",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "s",
+						"type": "uint256"
+					}
+				],
+				"name": "g2Mul",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"BLS12381.sol": "TestG2Mul"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"BLS12381.sol": {
+			"keccak256": "0x9f7946f70745332d0d932200c4b4f73543f566c3d3b638bdf39984deee71573e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://071f3fa1847057d9077927f293072a3821edeea5298b8634c8899539afa06700",
+				"dweb:/ipfs/QmaLxqbYTQjhfUd96pN9jdi5Z6rf5XUqG5b3imPJtNFpBh"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,184 @@
+extern crate core;
+
+//use core::num::fmt::Part::Num;
+use ark_bls12_381::{Bls12_381, Fr, G1Projective, G2Projective, Fq12};
+use ark_ec::{pairing::Pairing, PrimeGroup};
+use ark_ff::{Field, PrimeField, UniformRand, Zero, One};
+use rand::thread_rng;
+use std::collections::HashMap;
+use std::ops::{Mul, Add, Neg};
+use ark_ec::short_weierstrass::SWCurveConfig;
+// ✅ 引入运算符 trait
+
+///  BGW中用户公钥就是pp
+pub struct PublicParameters {
+    pub g1s:Vec<G1Projective>,
+    pub g2s: Vec<G2Projective>,
+}
+
+/// 用户私钥
+pub type UserSecretKey = G2Projective;
+
+/// 密文结构
+pub struct Ciphertext {
+    pub ct1: G1Projective,
+    pub ct2: G1Projective,
+    pub ct3: Fq12,
+}
+
+
+/// 生成 BGW 以及其参数
+pub struct BGW {
+    pub L: usize,
+    pub alpha_powers: Vec<Fr>,
+    pub upks: Vec<UserPublicKey>,
+    pub pp:PublicParameters,
+    pub g1: G1Projective,
+    pub g2: G2Projective,
+}
+pub struct UserPublicKey{
+    pub g1s:G1Projective,
+    pub g2s:Vec<G2Projective>,
+}
+impl BGW {
+    pub fn setup(L: usize) -> Self {
+        // 取随机数 α
+        let mut rng = thread_rng();
+        let alpha = Fr::rand(&mut rng);
+
+        // 计算 α 的幂，填充到向量中
+        let mut alpha_powers = vec![Fr::one(); 2 * L + 2];
+        for i in 1..alpha_powers.len() {
+            alpha_powers[i] = alpha_powers[i - 1] * alpha;
+        }
+        //生成元填充到参数中
+        let g1 = G1Projective::generator();
+        let g2 = G2Projective::generator();
+        //生成公共参数pp
+        let mut g1s = Vec::new();
+        for i in 1..=L {
+            g1s.push(g1 * alpha_powers[i]);
+        }
+
+        let mut g2s = Vec::new();
+        for i in 1..=2 * L {
+            g2s.push(g2 * alpha_powers[i]);
+        }
+        g2s.resize(2 * L + 2, G2Projective::zero()); // 填满 vec
+        g2s[L + 1] = g2; // 现在才合法
+
+        let pp=PublicParameters{g1s,g2s};
+        //返回
+        let upks = Vec::new();
+        Self { L, alpha_powers, upks,pp,g1, g2 }
+
+    }
+    //密钥生成
+
+    pub fn keygen(&self, j: usize) -> (UserSecretKey, UserPublicKey ) {
+        // 生成随机数t
+        let t_j = Fr::rand(&mut thread_rng());
+        // 生成usk
+        let usk = self.g2 * (t_j * self.alpha_powers[self.L +1- j]);
+        // 生成upk
+        let g1s = self.g1*t_j;
+        let mut g2s = Vec::new();
+        for k in 1..self.L+1 {
+            if k==self.L+1-j{
+                g2s.push(self.g2 );
+                continue;
+            }
+            g2s.push(self.g2 * self.alpha_powers[k]);
+        }
+        let mut upk = UserPublicKey{g1s,g2s};
+
+
+        (usk,upk)
+
+    }
+
+    pub fn encrypt(
+        &self,
+        S: &[usize],
+        M: &Fq12,
+    ) -> Ciphertext {
+        // 产生随机数 s
+        let mut rng = thread_rng();
+        let s = Fr::rand(&mut rng);
+        // 求ct1
+        let ct1 = self.g1 * s;
+        // 求ct2
+            // 求 sum pks
+        let mut sum1=self.g1;
+        for &j in S {
+            sum1 +=  self.upks[j].g1s;
+        }
+            // 求 sum g^{a_is}
+        let mut sum2 = Fr::zero();
+        for &j in S {
+            sum2 +=  self.alpha_powers[j];
+        }
+        let gais= self.g1 * sum2;
+        let result = gais+sum1;
+        let ct2 = result*s;
+
+        let key = Bls12_381::pairing(self.g1 *(s*self.alpha_powers[1]), self.g2 * self.alpha_powers[self.L]).0;
+        let ct3 = *M * key;
+
+        Ciphertext { ct1, ct2, ct3 }
+    }
+
+    pub fn decrypt(
+        &self,
+        i: usize,
+        S: &[usize],
+        usk_i: &UserSecretKey,
+        ct: &Ciphertext,
+    ) -> Fq12 {
+
+        let part1 = Bls12_381::pairing(ct.ct2, self.g2 * self.alpha_powers[self.L +1- i]).0;
+
+        let mut ski = usk_i.clone();
+        let mut sum = self.g2;
+        for &j in S {
+            if j == i {
+                continue;
+            }
+            sum=sum+self.upks[j].g2s[self.L+1-i]+self.g2*(-self.alpha_powers[self.L+1-i]);
+
+        }
+        let result=ski + sum;
+        let part2 = Bls12_381::pairing(ct.ct1, result).0;
+        ct.ct3 * part2 / part1
+    }
+}
+
+fn main() {
+    // 初始化----------------------------------------------------------------------------------------
+    let L = 5;
+    let mut scheme = BGW::setup(L);
+    
+    // 生成公私钥对，私钥存储在外用于实验，公钥存储在 BGW 结构体中--------------------------------------------
+    scheme.upks.push(UserPublicKey{g1s:G1Projective::generator(),g2s: vec![G2Projective::zero()]});
+    let mut secret_keys = HashMap::new();
+    for j in 1..L+1 {
+        let (sk,pk)=scheme.keygen(j);
+        secret_keys.insert(j, sk);
+        scheme.upks.push(pk);
+    }
+    
+    let S = vec![1, 3];
+    let r = Fr::rand(&mut thread_rng());
+    let gt = Bls12_381::pairing(scheme.g1, scheme.g2).0;
+    let M = gt.pow(r.into_bigint());
+    let ct = scheme.encrypt( &S, &M);
+
+    let i = 3;
+    let usk_i = &secret_keys[&i];
+    let recovered = scheme.decrypt(i, &S, usk_i, &ct);
+    if recovered ==M{
+        println!("recovered");
+    }else{
+        println!("not recovered");
+    }
+}

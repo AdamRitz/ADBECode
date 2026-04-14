@@ -1,0 +1,213 @@
+{
+	"compiler": {
+		"version": "0.8.31+commit.fd3a2265"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					}
+				],
+				"name": "G1Add",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scalar",
+						"type": "uint256"
+					}
+				],
+				"name": "G1Mul",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "d",
+						"type": "bytes"
+					}
+				],
+				"name": "G1Muls",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					}
+				],
+				"name": "G2Add",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scalar",
+						"type": "uint256"
+					}
+				],
+				"name": "G2Mul",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "d",
+						"type": "bytes"
+					}
+				],
+				"name": "G2Muls",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p3",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p4",
+						"type": "bytes"
+					}
+				],
+				"name": "Pairing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Verfiy.sol": "BLS"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Verfiy.sol": {
+			"keccak256": "0x4e8a70fab4a3d186ad3c753d5482041c1f4b518180a32e70a43e67c0d5845078",
+			"urls": [
+				"bzz-raw://1fe5d2bba4b0d7c3c65cb30570cc2ccd4699ef751c3d50217fa230a7f9871333",
+				"dweb:/ipfs/QmUzUTmAbfrY4ZBQv27vhRpXvx4eidiKZKwtnUQF56xf18"
+			]
+		}
+	},
+	"version": 1
+}

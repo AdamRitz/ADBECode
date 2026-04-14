@@ -1,0 +1,496 @@
+{
+	"compiler": {
+		"version": "0.8.31+commit.fd3a2265"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "Message",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes[]",
+						"name": "g1s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "bytes[]",
+						"name": "g2s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "gtau",
+						"type": "bytes"
+					}
+				],
+				"name": "Check",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "g1s",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes[]",
+						"name": "g2s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "CheckKey",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "g1s",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes[]",
+						"name": "g2s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "CheckKeyDBE",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes[]",
+						"name": "g1s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "bytes[]",
+						"name": "g2s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "pi1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pi2",
+						"type": "uint256"
+					}
+				],
+				"name": "CheckTest",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p3",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p4",
+						"type": "bytes"
+					}
+				],
+				"name": "EqualPairingCheck",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					}
+				],
+				"name": "G1Add",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scalar",
+						"type": "uint256"
+					}
+				],
+				"name": "G1Mul",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "d",
+						"type": "bytes"
+					}
+				],
+				"name": "G1Muls",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					}
+				],
+				"name": "G2Add",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scalar",
+						"type": "uint256"
+					}
+				],
+				"name": "G2Mul",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "d",
+						"type": "bytes"
+					}
+				],
+				"name": "G2Muls",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "point",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "p1",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p2",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p3",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "p4",
+						"type": "bytes"
+					}
+				],
+				"name": "Pairing",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "a",
+						"type": "bytes"
+					}
+				],
+				"name": "SendMessage",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes[]",
+						"name": "g1s",
+						"type": "bytes[]"
+					},
+					{
+						"internalType": "bytes[]",
+						"name": "g2s",
+						"type": "bytes[]"
+					}
+				],
+				"name": "SetPP",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "x",
+						"type": "bytes"
+					}
+				],
+				"name": "ZeroCheck",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "ok",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "lastg",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "ppg1s",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "ppg2s",
+				"outputs": [
+					{
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "w",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Verfiy.sol": "Verify"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [],
+		"viaIR": true
+	},
+	"sources": {
+		"Verfiy.sol": {
+			"keccak256": "0x30d8e1e2731560b8dc9722263a62d6d59ca45cfcc769157eb644159a5dfc7a68",
+			"urls": [
+				"bzz-raw://9c691260bf6e6ff0ca2a58ec1817a299b3f9623a0c3f8e7492bda66bfb3c4a7d",
+				"dweb:/ipfs/QmWGaKpHPpgjuPxAF7mjEomtTskjf5G4CTTuCYgoA72Wuf"
+			]
+		}
+	},
+	"version": 1
+}
